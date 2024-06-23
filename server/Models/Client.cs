@@ -13,5 +13,6 @@ namespace server.Models
         public int Salesman { get; set; }
         public string Source { get; set; } = string.Empty;
         public int Category { get; set; }
+        public List<Phone> Phones { get; set; } = new List<Phone>();
     }
 }
