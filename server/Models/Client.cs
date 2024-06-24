@@ -6,13 +6,10 @@ namespace server.Models
         public string Name { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public int CreatedBy { get; set; }
+        public Admin CreatedBy { get; set; } = new Admin();
         public DateTime CreatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int Salesman { get; set; }
-        public string Source { get; set; } = string.Empty;
-        public int Category { get; set; }
-        public List<Phone> Phones { get; set; } = new List<Phone>();
+        public Admin? UpdatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+        public List<Call> Calls { get; set; } = [];
     }
 }
