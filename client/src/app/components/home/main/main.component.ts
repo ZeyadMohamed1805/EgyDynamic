@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
     setTimeout(() => {
       const token: string = this.storageService.getItem('EGD_TOKEN');
       token
-        ? this.router.navigateByUrl('dashboard')
+        ? this.router.navigateByUrl('dashboard/clients')
         : this.router.navigateByUrl('auth');
     }, 3000);
     this.animateDots();

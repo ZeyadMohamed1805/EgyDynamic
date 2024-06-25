@@ -13,7 +13,10 @@ import { FooterComponent } from './layouts/footer/footer.component';
 })
 export class AppComponent implements OnInit {
   isLayoutVisible: boolean = false;
-  routesThatActivateLayout: string[] = ['/dashboard'];
+  routesThatActivateLayout: string[] = [
+    '/dashboard/clients',
+    '/dashboard/calls',
+  ];
 
   constructor(private readonly router: Router) {}
 
