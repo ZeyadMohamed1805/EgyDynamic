@@ -1,0 +1,15 @@
+#auth {
+    min-height: 100vh;
+    width: 100%;
+    background-image: var(--radial-linear-color);
+    display: grid;
+    place-items: center;
+    padding: 40px 24px;
+
+    .container {
+        width: 100%;
+        max-width: 800px;
+        display: grid;
+        place-items: center;
+    }
+}
