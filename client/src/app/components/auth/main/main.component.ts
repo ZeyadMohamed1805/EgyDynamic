@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [],
+  imports: [FormComponent],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  styleUrl: './main.component.scss',
 })
-export class MainComponent {
-
-}
+export class MainComponent {}

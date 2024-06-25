@@ -1,1 +1,30 @@
-<p>form works!</p>
+<form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <img src="../../../../assets/logo.png" alt="Logo" />
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>البريد الإلكترونى</mat-label>
+    <input matInput formControlName="email" placeholder="البريد الإلكترونى" />
+    <mat-error *ngIf="formGroup.get('email')?.hasError('required')"
+      >يجب إدخال البريد الإلكترونى
+    </mat-error>
+    <mat-error *ngIf="formGroup.get('email')?.hasError('email')"
+      >البريد الإلكترونى غير صحيح</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>كلمة السر</mat-label>
+    <input
+      matInput
+      type="password"
+      formControlName="password"
+      placeholder="كلمة السر"
+    />
+    <mat-error *ngIf="formGroup.get('password')?.hasError('required')"
+      >يجب إدخال كلمة السر</mat-error
+    >
+  </mat-form-field>
+
+  <button type="submit" class="button" [disabled]="!formGroup.valid">
+    <span>احفظ</span>
+  </button>
+</form>
