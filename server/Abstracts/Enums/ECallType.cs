@@ -1,6 +1,6 @@
-namespace server.Abstracts
+namespace server.Abstracts.Enums
 {
-    public enum CallType
+    public enum ECallType
     {
         PhoneCall,
         Message,

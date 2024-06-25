@@ -2,13 +2,17 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using server.Abstracts.Interfaces;
 using server.Data;
 using server.Models;
+using server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMvc();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -47,6 +51,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -58,4 +64,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 app.Run();

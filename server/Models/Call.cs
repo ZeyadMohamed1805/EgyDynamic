@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using server.Abstracts;
+using server.Abstracts.Enums;
 
 namespace server.Models
 {
@@ -10,7 +10,7 @@ namespace server.Models
         public int Duration { get; set; }
         public DateTime MadeOn { get; set; }
         public bool IsCompleted { get; set; }
-        public CallType Type { get; set; }
+        public ECallType Type { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
 
