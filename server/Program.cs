@@ -41,6 +41,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors(corsOptions =>
+{
+    corsOptions.AddPolicy("Policy", corsPolicyBuilder =>
+    {
+        corsPolicyBuilder.WithOrigins("http://localhost:4200")
+                         .AllowAnyHeader()
+                         .AllowAnyMethod()
+                         .AllowCredentials();
+    });
+});
 
 builder.Services.AddIdentity<Admin, IdentityRole>(options =>
 {
@@ -85,6 +95,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("Policy");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

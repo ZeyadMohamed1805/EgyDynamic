@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
+import { StorageService } from '../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-form',
@@ -23,6 +25,8 @@ export class FormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private storageService: StorageService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
@@ -33,6 +37,16 @@ export class FormComponent {
   }
 
   onSubmit(): void {
-    console.log(this.formGroup.value);
+    this.authService.login(this.formGroup.value).subscribe({
+      next: (response) => {
+        this.storageService.setItem<string>('EGD_TOKEN', response.token);
+        this.router.navigateByUrl('not-found');
+      },
+      error: () => {
+        this.snackBar.open('لم يتم التسجيل', 'تمام', {
+          panelClass: ['error-snackbar'],
+        });
+      },
+    });
   }
 }

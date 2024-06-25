@@ -2,7 +2,8 @@
     --primary-color: #0274BE;
     --accent-color: #E74E1B;
     --grey-color: #F4F4F5;
-    --radial-linear-color: radial-gradient(#077FFB, #212121);
+    --black-color: #212121;
+    --radial-linear-color: radial-gradient(var(--primary-color), var(--black-color));
 }
 
 * {
@@ -12,3 +13,17 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
+
+.error-snackbar {
+    background-color: var(--accent-color);
+    color: var(--grey-color);
+}
+
+.mat-mdc-snack-bar-container {
+    &.error-snackbar {
+      --mdc-snackbar-container-color: var(--accent-color);
+      --mat-mdc-snack-bar-button-color: var(--grey-color);
+      --mdc-snackbar-supporting-text-color: var(--grey-color);
+      --mat-snack-bar-button-color: var(--grey-color);
+    }
+  }
