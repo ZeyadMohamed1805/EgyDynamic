@@ -1,5 +1,6 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -11,10 +12,18 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
   dots: WritableSignal<number> = signal(1);
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
-    setTimeout(() => this.router.navigateByUrl('auth'), 3000);
+    setTimeout(() => {
+      const token: string = this.storageService.getItem('EGD_TOKEN');
+      token
+        ? this.router.navigateByUrl('dashboard')
+        : this.router.navigateByUrl('auth');
+    }, 3000);
     this.animateDots();
   }
 
