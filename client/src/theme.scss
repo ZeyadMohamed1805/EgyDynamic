@@ -1,10 +1,9 @@
 @use '@angular/material' as mat;
 @include mat.core();
 
-
-$custom-primary: mat.define-palette(mat.define-hues((500: #0274BE)));
-$custom-accent: #F4F4F5;
-$custom-warn: mat.define-palette(mat.define-hues((500: #E74E1B)));
+$custom-primary: mat.define-palette(mat.$blue-palette, 500);
+$custom-accent: mat.define-palette(mat.$deep-orange-palette, 500);
+$custom-warn: mat.define-palette(mat.$red-palette);
 
 $custom-theme: mat.define-light-theme((
   color: (
@@ -13,7 +12,7 @@ $custom-theme: mat.define-light-theme((
     warn: $custom-warn,
   ),
   typography: mat.define-typography-config(
-    $font-family: "Tajawal", sans-serif
+    $font-family: '"Poppins", sans-serif'
   ),
   density: 0
 ));
