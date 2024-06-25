@@ -6,7 +6,6 @@ using Microsoft.OpenApi.Models;
 using server.Abstracts.Interfaces;
 using server.Data;
 using server.Models;
-using server.Repository;
 using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -76,7 +75,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
