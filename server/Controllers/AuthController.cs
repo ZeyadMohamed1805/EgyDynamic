@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using server.Abstracts.Interfaces;
 using server.DTOs.Auth;
 using server.Models;
 
@@ -9,11 +11,40 @@ namespace server.Controllers
     [Route("api/v1/auth")]
     public class AuthController : ControllerBase
     {
+        private readonly ITokenService _tokenService;
         private readonly UserManager<Admin> _userManager;
-        public AuthController(UserManager<Admin> userManager)
+        private readonly SignInManager<Admin> _signInManager;
+        public AuthController(ITokenService tokenService, UserManager<Admin> userManager, SignInManager<Admin> signInManager)
         {
-            this._userManager = userManager;
+            _tokenService = tokenService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var admin = await _userManager.Users.FirstOrDefaultAsync(user => user.Email == loginDTO.Email);
+
+            if (admin == null)
+                return Unauthorized("Invalid Email!");
+
+            var result = await _signInManager.CheckPasswordSignInAsync(admin, loginDTO.Password!, false);
+
+            if (!result.Succeeded)
+                return Unauthorized("Incorrect Email/Password");
+
+            return Ok(
+                new AdminDTO
+                {
+                    Email = admin.Email!,
+                    Token = _tokenService.CreateToken(admin)
+                }
+            );
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
