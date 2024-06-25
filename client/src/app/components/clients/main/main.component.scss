@@ -1,0 +1,15 @@
+#clients {
+    width: 100%;
+    padding: 24px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        h1 {
+            font-size: 40px;
+            font-weight: 700;
+        }
+    }
+}

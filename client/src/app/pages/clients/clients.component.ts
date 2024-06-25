@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
+import { MainComponent } from '../../components/clients/main/main.component';
 
 @Component({
   selector: 'app-clients',
   standalone: true,
-  imports: [],
-  templateUrl: './clients.component.html',
-  styleUrl: './clients.component.scss'
+  imports: [MainComponent],
+  template: '<app-main />',
 })
-export class ClientsComponent {
-
-}
+export class ClientsComponent {}
