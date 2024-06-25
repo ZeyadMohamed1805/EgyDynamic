@@ -27,7 +27,8 @@ namespace server.Controllers
         public async Task<IActionResult> GetAll([FromQuery] ClientQuery query)
         {
             var clients = await _clientRepository.GetAll(query);
-            return Ok(clients);
+            var clientsDto = clients.Select(client => client.ToGetClientsDTOFromClient()).ToList();
+            return Ok(clientsDto);
         }
 
         [HttpGet("{id}")]

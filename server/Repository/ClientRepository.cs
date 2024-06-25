@@ -18,7 +18,7 @@ namespace server.Repository
         public async Task<List<Client>> GetAll(ClientQuery query)
         {
             var skipNumber = (query.PageNumber - 1) * query.PageSize;
-            var clients = await _dbContext.Clients.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+            var clients = await _dbContext.Clients.Skip(skipNumber).Take(query.PageSize).Include(client => client.CreatedBy).Include(client => client.UpdatedBy).ToListAsync();
             return clients;
         }
 
