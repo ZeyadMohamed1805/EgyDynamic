@@ -1,0 +1,32 @@
+header {
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 1px;
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: 16px;
+
+            .avatar {
+                background-color: var(--grey-color);
+                width: 52px;
+                height: 52px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                font-size: 24px;
+                cursor: pointer;
+            }
+        }
+    }
+}

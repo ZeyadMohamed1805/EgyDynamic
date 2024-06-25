@@ -1,1 +1,13 @@
-<p>header works!</p>
+<header>
+  <nav>
+    <div class="menu" [matMenuTriggerFor]="menu">
+      <span> مرحبا, زياد! </span>
+      <div class="avatar">Z</div>
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span> تسجيل الخروج </span>
+      </button>
+    </mat-menu>
+  </nav>
+</header>
