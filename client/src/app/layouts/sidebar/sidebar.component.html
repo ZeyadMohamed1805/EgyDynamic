@@ -1,1 +1,35 @@
-<p>sidebar works!</p>
+<div class="sidebar">
+  <div class="container">
+    <img src="../../../assets/logo.png" alt="Logo" />
+    <form>
+      <span class="parent">
+        <mat-checkbox
+          [checked]="columnList().completed"
+          [indeterminate]="partiallyComplete()"
+          (change)="update($event.checked)"
+        >
+          <span>
+            {{ columnList().name }}
+          </span>
+        </mat-checkbox>
+      </span>
+      <mat-divider />
+      <span>
+        <ul>
+          @for (column of columnList().subColumns; track column.name;) {
+          <li>
+            <mat-checkbox
+              [checked]="column.completed"
+              (change)="update($event.checked, $index)"
+            >
+              <span>
+                {{ column.name }}
+              </span>
+            </mat-checkbox>
+          </li>
+          }
+        </ul>
+      </span>
+    </form>
+  </div>
+</div>

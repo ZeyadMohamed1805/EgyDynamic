@@ -1,0 +1,34 @@
+.sidebar {
+    width: 100%;
+    max-width: 240px;
+    min-height: 100vh;
+    background-color: var(--grey-color);
+    box-shadow: 0 0 5px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            span {
+                font-size: 20px;
+            }
+        }
+    }
+}
