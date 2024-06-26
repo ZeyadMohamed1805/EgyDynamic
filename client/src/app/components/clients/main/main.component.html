@@ -3,8 +3,8 @@
     <h1>العملاء</h1>
     <app-table
       [data]="data"
-      [columns]="columns"
-      [names]="names"
+      [columns]="clientService.columns"
+      [names]="clientService.names"
       (turn)="onTurn($event)"
     />
   </div>

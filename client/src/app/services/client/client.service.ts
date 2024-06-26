@@ -6,6 +6,26 @@ import { TClientDTO } from '../../types/dtos/client';
   providedIn: 'root',
 })
 export class ClientService {
+  names: string[] = [
+    'الرقم',
+    'الاسم',
+    'التوصيف',
+    'الإقامة',
+    'المدخل',
+    'التاريخ',
+    'المعدل',
+    'اليوم',
+  ];
+  columns: string[] = [
+    'id',
+    'name',
+    'description',
+    'address',
+    'createdBy',
+    'createdOn',
+    'updatedBy',
+    'updatedOn',
+  ];
   pageSize: number = 3;
   pageNumber: number = 1;
 

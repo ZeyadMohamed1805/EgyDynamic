@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDivider } from '@angular/material/divider';
 import { TColumnType } from '../../types/columns/columns';
+import { ClientService } from '../../services/client/client.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,17 +15,20 @@ import { TColumnType } from '../../types/columns/columns';
 export class SidebarComponent {
   readonly columnList: WritableSignal<TColumnType> = signal<TColumnType>({
     name: 'الجميع',
-    completed: false,
+    completed: true,
     subColumns: [
-      { name: 'الرقم', column: 'name', completed: false },
-      { name: 'محل الإقامة', column: 'address', completed: false },
-      { name: 'التوصيف', column: 'description', completed: false },
-      { name: 'ادخال بواسطة', column: 'createdBy', completed: false },
-      { name: 'تاريخ الإدخال', column: 'createdOn', completed: false },
-      { name: 'تعديل بواسطة', column: 'updatedBy', completed: false },
-      { name: 'تاريخ التعديل', column: 'updatedOn', completed: false },
+      { name: 'الرقم', column: 'id', completed: true },
+      { name: 'الاسم', column: 'name', completed: true },
+      { name: 'التوصيف', column: 'description', completed: true },
+      { name: 'الإقامة', column: 'address', completed: true },
+      { name: 'المدخل', column: 'createdBy', completed: true },
+      { name: 'التاريخ', column: 'createdOn', completed: true },
+      { name: 'المعدل', column: 'updatedBy', completed: true },
+      { name: 'اليوم', column: 'updatedOn', completed: true },
     ],
   });
+
+  constructor(private readonly clientService: ClientService) {}
 
   readonly partiallyComplete = computed(() => {
     const column = this.columnList();
@@ -49,5 +53,11 @@ export class SidebarComponent {
       }
       return { ...column };
     });
+    this.clientService.columns = this.columnList()
+      .subColumns.filter((column) => column.completed)
+      .map((column) => column.column);
+    this.clientService.names = this.columnList()
+      .subColumns.filter((column) => column.completed)
+      .map((column) => column.name);
   }
 }
