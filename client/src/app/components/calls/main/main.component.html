@@ -1,1 +1,49 @@
-<p>main works!</p>
+<section id="clients">
+  <div class="container">
+    <div class="headers">
+      <h1>المكالمات</h1>
+      <button
+        mat-fab
+        extended
+        color="accent"
+        (click)="onOpenDialog({ modal: 0 })"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        الرجوع
+      </button>
+    </div>
+    <div class="functionalities">
+      <div class="buttons">
+        <button mat-mini-fab color="accent" (click)="onExportTableToExcel()">
+          <mat-icon>folder</mat-icon>
+        </button>
+        <button mat-mini-fab color="accent" (click)="onPrintTable()">
+          <mat-icon>print</mat-icon>
+        </button>
+        <button mat-mini-fab color="accent" (click)="onFetchClients()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+      <button
+        mat-fab
+        extended
+        color="primary"
+        (click)="onOpenDialog({ modal: 0 })"
+      >
+        <mat-icon>add</mat-icon>
+        إضافة
+      </button>
+    </div>
+    <div class="table">
+      <app-table
+        [data]="data"
+        [totalCount]="clientService.totalCount"
+        [totalPages]="clientService.totalPages"
+        [columns]="columns()"
+        [names]="names()"
+        (turn)="onTurn($event)"
+        (open)="onOpenDialog($event)"
+      />
+    </div>
+  </div>
+</section>

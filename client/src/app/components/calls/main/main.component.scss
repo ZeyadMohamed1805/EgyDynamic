@@ -1,0 +1,42 @@
+#clients {
+    width: 100%;
+    padding: 24px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .headers {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            h1 {
+                font-size: 40px;
+                font-weight: 700;
+            }
+
+            button {
+                border-radius: 8px;
+            }
+        }
+
+
+        .functionalities {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .buttons {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+            button {
+                border-radius: 8px;
+            }
+        }
+    }
+}
