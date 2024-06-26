@@ -21,7 +21,7 @@ import { CallService } from '../../services/call/call.service';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
-  route = signal('/dashboard/clients');
+  route = signal('');
   readonly columnList: WritableSignal<TColumnType> = signal<TColumnType>({
     name: 'الجميع',
     completed: true,
@@ -59,6 +59,8 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.set(this.router.url);
+
     this.router.events.subscribe(() => {
       this.route.set(this.router.url);
     });

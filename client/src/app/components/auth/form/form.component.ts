@@ -40,7 +40,7 @@ export class FormComponent {
     this.authService.login(this.formGroup.value).subscribe({
       next: (response) => {
         this.storageService.setItem<string>('EGD_TOKEN', response.token);
-        this.router.navigateByUrl('dashboard/clients');
+        this.router.navigateByUrl('');
       },
       error: () => {
         this.snackBar.open('لم يتم التسجيل', 'تمام', {

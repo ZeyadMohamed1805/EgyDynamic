@@ -1,6 +1,9 @@
 <section id="home">
-  <h1>
-    جارى التحميل
-    <span> @for(dot of [].constructor( dots() ); track $index) { . } </span>
-  </h1>
+  <div class="container">
+    <img src="../../../../assets/logo.png" alt="Logo" />
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progress()"
+    ></mat-progress-bar>
+  </div>
 </section>

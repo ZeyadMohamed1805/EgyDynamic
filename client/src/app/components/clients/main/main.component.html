@@ -3,10 +3,18 @@
     <h1>العملاء</h1>
     <div class="functionalities">
       <div class="buttons">
-        <button mat-mini-fab color="accent" (click)="onExportTableToExcel()">
+        <button
+          mat-mini-fab
+          color="accent"
+          (click)="exportsService.onExportTableToExcel()"
+        >
           <mat-icon>folder</mat-icon>
         </button>
-        <button mat-mini-fab color="accent" (click)="onPrintTable()">
+        <button
+          mat-mini-fab
+          color="accent"
+          (click)="exportsService.onPrintTable()"
+        >
           <mat-icon>print</mat-icon>
         </button>
         <button mat-mini-fab color="accent" (click)="onFetchClients()">

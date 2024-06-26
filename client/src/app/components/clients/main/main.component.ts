@@ -10,8 +10,8 @@ import { PostComponent } from '../post/post.component';
 import { EModalType } from '../../../types/enums/modal';
 import { PutComponent } from '../put/put.component';
 import { DeleteComponent } from '../delete/delete.component';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+import { TokenService } from '../../../services/token/token.service';
+import { ExportsService } from '../../../services/exports/exports.service';
 
 @Component({
   selector: 'app-main',
@@ -27,10 +27,13 @@ export class MainComponent implements OnInit {
 
   constructor(
     public clientService: ClientService,
+    public exportsService: ExportsService,
+    private tokenService: TokenService,
     private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.tokenService.validateToken();
     this.onFetchClients();
   }
 
@@ -77,29 +80,5 @@ export class MainComponent implements OnInit {
             this.data = response.data;
           },
         });
-  }
-
-  onPrintTable() {
-    const printContents = document.querySelector('.table')!.innerHTML;
-    const originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    window.location.reload();
-  }
-
-  onExportTableToExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(
-      document.querySelector('.table')
-    );
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    saveAs(
-      new Blob([wbout], { type: 'application/octet-stream' }),
-      'table.xlsx'
-    );
   }
 }
