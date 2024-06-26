@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientService } from '../../../services/client/client.service';
 import { NgIf } from '@angular/common';
-import { TClient, TClientDTO } from '../../../types/dtos/client';
+import { TClient } from '../../../types/dtos/client';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 

@@ -1,7 +1,6 @@
 import { Component, OnInit, computed } from '@angular/core';
 import { TableComponent } from '../../common/table/table.component';
 import { ETurnPage } from '../../../types/enums/turn';
-import { TClient } from '../../../types/dtos/client';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -52,7 +51,9 @@ export class MainComponent implements OnInit {
     });
   }
 
-  onOpenDialog(event: { modal: EModalType; data?: TClient }) {
+  onOpenDialog(event: { modal: EModalType; data?: TCall }) {
+    console.log(event.data);
+
     switch (event.modal) {
       case EModalType.Post:
         this.dialog.open(PostComponent);
