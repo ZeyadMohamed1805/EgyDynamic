@@ -10,5 +10,6 @@ namespace server.Abstracts.Interfaces
         public Task<Client?> GetById(int id);
         public Task Post(Client client);
         public Task Put(Client client, PutClientDTO clientDTO, Admin admin);
+        public Task Delete(Client client);
     }
 }

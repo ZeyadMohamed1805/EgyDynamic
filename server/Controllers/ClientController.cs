@@ -73,5 +73,17 @@ namespace server.Controllers
 
             return Ok();
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var client = await _clientRepository.GetById(id);
+
+            if (client == null)
+                return NotFound();
+
+            await _clientRepository.Delete(client);
+
+            return NoContent();
+        }
     }
 }

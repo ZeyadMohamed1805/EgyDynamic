@@ -45,5 +45,11 @@ namespace server.Repository
 
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task Delete(Client client)
+        {
+            _dbContext.Clients.Remove(client);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
