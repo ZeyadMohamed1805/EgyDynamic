@@ -63,4 +63,8 @@ export class ClientService {
       client
     );
   }
+
+  delete(id: number) {
+    return this.apiService.delete<null>(`/client/${id}`);
+  }
 }

@@ -1,0 +1,22 @@
+<div class="delete">
+  <h1 mat-dialog-title>
+    <span>حذف العميل</span>
+  </h1>
+  <mat-dialog-content>
+    <span> هل أنت مصر على حذف هذا العميل؟ </span>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>
+      <span> لا </span>
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      color="accent"
+      (click)="onDelete()"
+    >
+      <span> نعم </span>
+    </button>
+  </mat-dialog-actions>
+</div>

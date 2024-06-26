@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostComponent } from '../post/post.component';
 import { EModalType } from '../../../types/enums/modal';
 import { PutComponent } from '../put/put.component';
+import { DeleteComponent } from '../delete/delete.component';
 
 @Component({
   selector: 'app-main',
@@ -45,6 +46,10 @@ export class MainComponent implements OnInit {
           data: event.data,
         });
         break;
+      default:
+        this.dialog.open(DeleteComponent, {
+          data: event.data?.id,
+        });
     }
   }
 
