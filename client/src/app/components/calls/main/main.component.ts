@@ -1,6 +1,5 @@
 import { Component, OnInit, computed } from '@angular/core';
 import { TableComponent } from '../../common/table/table.component';
-import { ClientService } from '../../../services/client/client.service';
 import { ETurnPage } from '../../../types/enums/turn';
 import { TClient } from '../../../types/dtos/client';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +11,9 @@ import { PutComponent } from '../put/put.component';
 import { DeleteComponent } from '../delete/delete.component';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { CallService } from '../../../services/call/call.service';
+import { TCall } from '../../../types/dtos/call';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -21,24 +23,30 @@ import { saveAs } from 'file-saver';
   styleUrl: './main.component.scss',
 })
 export class MainComponent implements OnInit {
-  columns = computed(() => [...this.clientService.columns(), 'actions']);
-  names = computed(() => [...this.clientService.names(), 'القرارات']);
-  data: TClient[] = [];
+  columns = computed(() => [...this.callService.columns(), 'actions']);
+  names = computed(() => [...this.callService.names(), 'القرارات']);
+  clientId: number = 1;
+  data: TCall[] = [];
 
   constructor(
-    public clientService: ClientService,
-    private readonly dialog: MatDialog
+    public callService: CallService,
+    private readonly dialog: MatDialog,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
-    this.onFetchClients();
+    this.activatedRoute.params.subscribe((params) => {
+      this.clientId = params['id'];
+    });
+    this.onFetchCalls();
   }
 
-  onFetchClients(): void {
-    this.clientService.getAll().subscribe({
+  onFetchCalls(): void {
+    this.callService.getAll(this.clientId).subscribe({
       next: (response) => {
-        this.clientService.totalCount = response.totalCount;
-        this.clientService.totalPages = response.totalPages;
+        this.callService.totalCount = response.totalCount;
+        this.callService.totalPages = response.totalPages;
         this.data = response.data;
       },
     });
@@ -63,17 +71,17 @@ export class MainComponent implements OnInit {
 
   onTurn(turnType: ETurnPage): void {
     turnType === ETurnPage.Next
-      ? this.clientService.getNextPage().subscribe({
+      ? this.callService.getNextPage(this.clientId).subscribe({
           next: (response) => {
-            this.clientService.totalCount = response.totalCount;
-            this.clientService.totalPages = response.totalPages;
+            this.callService.totalCount = response.totalCount;
+            this.callService.totalPages = response.totalPages;
             this.data = response.data;
           },
         })
-      : this.clientService.getPreviousPage().subscribe({
+      : this.callService.getPreviousPage(this.clientId).subscribe({
           next: (response) => {
-            this.clientService.totalCount = response.totalCount;
-            this.clientService.totalPages = response.totalPages;
+            this.callService.totalCount = response.totalCount;
+            this.callService.totalPages = response.totalPages;
             this.data = response.data;
           },
         });
@@ -101,5 +109,9 @@ export class MainComponent implements OnInit {
       new Blob([wbout], { type: 'application/octet-stream' }),
       'table.xlsx'
     );
+  }
+
+  onGoBack(): void {
+    this.router.navigateByUrl('dashboard/clients');
   }
 }
