@@ -12,7 +12,10 @@
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
   <div class="pagination">
-    <mat-paginator [hidePageSize]="true" [showFirstLastButtons]="false">
-    </mat-paginator>
+    <mat-paginator
+      [length]="this.data.length < 3 ? this.data.length : this.data.length + 1"
+      [pageSize]="this.data.length"
+      (page)="onTurn($event)"
+    ></mat-paginator>
   </div>
 </div>

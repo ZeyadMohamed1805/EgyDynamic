@@ -5,13 +5,15 @@ import { ApiService } from '../api/api.service';
   providedIn: 'root',
 })
 export class ClientService {
-  pageSize: number = 10;
+  pageSize: number = 3;
   pageNumber: number = 1;
 
   constructor(private readonly apiService: ApiService) {}
 
   getAll() {
-    return this.apiService.get('/client');
+    return this.apiService.get(
+      `/client?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`
+    );
   }
 
   getNextPage() {

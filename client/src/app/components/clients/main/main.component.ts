@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../common/table/table.component';
 import { ClientService } from '../../../services/client/client.service';
+import { ETurnPage } from '../../../types/enums/turn';
 
 @Component({
   selector: 'app-main',
@@ -40,5 +41,19 @@ export class MainComponent implements OnInit {
         this.data = response;
       },
     });
+  }
+
+  onTurn(turnType: ETurnPage): void {
+    turnType === ETurnPage.Next
+      ? this.clientService.getNextPage().subscribe({
+          next: (response: any) => {
+            this.data = response;
+          },
+        })
+      : this.clientService.getPreviousPage().subscribe({
+          next: (response: any) => {
+            this.data = response;
+          },
+        });
   }
 }
