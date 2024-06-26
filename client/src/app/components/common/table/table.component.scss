@@ -26,3 +26,17 @@
         place-items: center;
     }
 }
+
+@media print {
+    .table {
+      page-break-inside: avoid;
+    }
+  
+    .buttons {
+      display: none;
+    }
+  
+    mat-paginator {
+      display: none;
+    }
+  }

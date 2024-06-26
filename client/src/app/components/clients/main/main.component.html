@@ -1,7 +1,10 @@
 <section id="clients">
   <div class="container">
-    <div class="headers">
-      <h1>العملاء</h1>
+    <h1>العملاء</h1>
+    <div class="functionalities">
+      <button mat-mini-fab color="accent" (click)="printTable()">
+        <mat-icon>print</mat-icon>
+      </button>
       <button
         mat-fab
         extended
@@ -12,12 +15,14 @@
         إضافة
       </button>
     </div>
-    <app-table
-      [data]="data"
-      [columns]="columns()"
-      [names]="names()"
-      (turn)="onTurn($event)"
-      (open)="openDialog($event)"
-    />
+    <div class="table">
+      <app-table
+        [data]="data"
+        [columns]="columns()"
+        [names]="names()"
+        (turn)="onTurn($event)"
+        (open)="openDialog($event)"
+      />
+    </div>
   </div>
 </section>
