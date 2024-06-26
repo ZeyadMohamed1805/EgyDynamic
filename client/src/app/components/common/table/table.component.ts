@@ -6,6 +6,7 @@ import {
   OnChanges,
   Output,
   ViewChild,
+  signal,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -40,11 +41,18 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @Input() totalCount: number = 3;
   @Output() turn = new EventEmitter();
   @Output() open = new EventEmitter();
+  route = signal('/dashboard/clients');
   dataSource = new MatTableDataSource(this.data);
 
   constructor(private readonly router: Router) {}
 
   @ViewChild(MatPaginator) paginator: any;
+
+  ngOnInit(): void {
+    this.router.events.subscribe(() => {
+      this.route.set(this.router.url);
+    });
+  }
 
   ngOnChanges(): void {
     this.dataSource = new MatTableDataSource(this.data);

@@ -16,7 +16,7 @@
       <mat-divider />
       <span>
         <ul>
-          @for (column of columnList().subColumns; track column.name;) {
+          @for (column of columnList().subColumns(); track column.name;) {
           <li>
             <mat-checkbox
               [checked]="column.completed"

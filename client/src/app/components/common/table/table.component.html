@@ -10,7 +10,7 @@
         <div class="buttons">
           <button
             mat-mini-fab
-            *ngIf="columns[1] === 'name'"
+            *ngIf="route().includes('clients')"
             color="accent"
             (click)="onViewCalls(element.id)"
           >
