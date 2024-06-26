@@ -31,6 +31,10 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.onFetchClients();
+  }
+
+  onFetchClients(): void {
     this.clientService.getAll().subscribe({
       next: (response) => {
         this.data = response;
@@ -38,7 +42,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  openDialog(event: { modal: EModalType; data?: TClientDTO }) {
+  onOpenDialog(event: { modal: EModalType; data?: TClientDTO }) {
     switch (event.modal) {
       case EModalType.Post:
         this.dialog.open(PostComponent);
@@ -69,7 +73,7 @@ export class MainComponent implements OnInit {
         });
   }
 
-  printTable() {
+  onPrintTable() {
     const printContents = document.querySelector('.table')!.innerHTML;
     const originalContents = document.body.innerHTML;
 
@@ -79,7 +83,7 @@ export class MainComponent implements OnInit {
     window.location.reload();
   }
 
-  exportTableToExcel() {
+  onExportTableToExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(
       document.querySelector('.table')
     );

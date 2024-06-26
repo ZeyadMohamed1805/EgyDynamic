@@ -36,6 +36,8 @@ export class ClientService {
   constructor(private readonly apiService: ApiService) {}
 
   getAll() {
+    this.pageNumber = 1;
+    this.pageSize = 3;
     return this.apiService.get<TClientDTO[]>(
       `/client?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`
     );
@@ -49,7 +51,9 @@ export class ClientService {
 
   getPreviousPage() {
     return this.apiService.get<TClientDTO[]>(
-      `/client?pageSize=${this.pageSize}&pageNumber=${--this.pageNumber}`
+      `/client?pageSize=${this.pageSize}&pageNumber=${
+        this.pageNumber > 1 ? --this.pageNumber : 1
+      }`
     );
   }
 
