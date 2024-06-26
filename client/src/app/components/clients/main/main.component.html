@@ -2,9 +2,14 @@
   <div class="container">
     <h1>العملاء</h1>
     <div class="functionalities">
-      <button mat-mini-fab color="accent" (click)="printTable()">
-        <mat-icon>print</mat-icon>
-      </button>
+      <div class="buttons">
+        <button mat-mini-fab color="accent" (click)="exportTableToExcel()">
+          <mat-icon>folder</mat-icon>
+        </button>
+        <button mat-mini-fab color="accent" (click)="printTable()">
+          <mat-icon>print</mat-icon>
+        </button>
+      </div>
       <button
         mat-fab
         extended

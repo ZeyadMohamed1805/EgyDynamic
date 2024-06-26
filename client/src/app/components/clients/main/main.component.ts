@@ -10,6 +10,8 @@ import { PostComponent } from '../post/post.component';
 import { EModalType } from '../../../types/enums/modal';
 import { PutComponent } from '../put/put.component';
 import { DeleteComponent } from '../delete/delete.component';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-main',
@@ -75,5 +77,19 @@ export class MainComponent implements OnInit {
     window.print();
     document.body.innerHTML = originalContents;
     window.location.reload();
+  }
+
+  exportTableToExcel() {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(
+      document.querySelector('.table')
+    );
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    saveAs(
+      new Blob([wbout], { type: 'application/octet-stream' }),
+      'table.xlsx'
+    );
   }
 }

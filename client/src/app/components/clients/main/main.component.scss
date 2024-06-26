@@ -17,6 +17,12 @@
             align-items: center;
             justify-content: space-between;
 
+            .buttons {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
             button {
                 border-radius: 8px;
             }
