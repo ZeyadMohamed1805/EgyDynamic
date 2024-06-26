@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../common/table/table.component';
+import { ClientService } from '../../../services/client/client.service';
 
 @Component({
   selector: 'app-main',
@@ -8,7 +9,7 @@ import { TableComponent } from '../../common/table/table.component';
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
   displayedColumns: string[] = [
     'الرقم',
     'الاسم',
@@ -20,6 +21,12 @@ export class MainComponent {
     'اليوم',
   ];
   data = ELEMENT_DATA;
+
+  constructor(public readonly clientService: ClientService) {}
+
+  ngOnInit(): void {
+    this.clientService.getAll();
+  }
 }
 
 const ELEMENT_DATA = [
