@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using server.Abstracts.Interfaces;
 using server.Data;
+using server.DTOs.Client;
 using server.Models;
 using server.Utils.Client;
 
@@ -31,6 +32,17 @@ namespace server.Repository
         public async Task Post(Client client)
         {
             await _dbContext.Clients.AddAsync(client);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Put(Client client, PutClientDTO clientDTO, Admin admin)
+        {
+            client.UpdatedOn = DateTime.Now;
+            client.UpdatedBy = admin;
+            client.Name = clientDTO.Name;
+            client.Address = clientDTO.Address;
+            client.Description = clientDTO.Description;
+
             await _dbContext.SaveChangesAsync();
         }
     }

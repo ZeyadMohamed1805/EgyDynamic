@@ -55,5 +55,23 @@ namespace server.Controllers
             await _clientRepository.Post(client);
             return Ok();
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] PutClientDTO clientDTO)
+        {
+            var client = await _clientRepository.GetById(id);
+
+            if (client == null)
+                return NotFound();
+
+            var username = User.GetUsername();
+            var admin = await _userManager.FindByNameAsync(username);
+
+            if (admin == null)
+                return Unauthorized();
+
+            await _clientRepository.Put(client, clientDTO, admin);
+
+            return Ok();
+        }
     }
 }
