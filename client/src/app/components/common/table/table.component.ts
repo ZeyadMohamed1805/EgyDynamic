@@ -3,7 +3,6 @@ import {
   Component,
   Input,
   OnChanges,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -17,7 +16,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   styleUrl: './table.component.scss',
 })
 export class TableComponent implements AfterViewInit, OnChanges {
-  @Input() displayedColumns: string[] = [];
+  @Input() columns: string[] = [];
+  @Input() names: string[] = [];
   @Input() data: any = [];
   dataSource = new MatTableDataSource(this.data);
 
