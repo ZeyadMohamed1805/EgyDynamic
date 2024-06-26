@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
+import { MainComponent } from '../../components/calls/main/main.component';
 
 @Component({
   selector: 'app-calls',
   standalone: true,
-  imports: [],
-  templateUrl: './calls.component.html',
-  styleUrl: './calls.component.scss'
+  imports: [MainComponent],
+  template: '<app-main />',
 })
-export class CallsComponent {
-
-}
+export class CallsComponent {}
