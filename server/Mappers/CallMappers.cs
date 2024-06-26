@@ -22,5 +22,21 @@ namespace server.Mappers
                 UpdatedBy = call.UpdatedBy?.UserName
             };
         }
+
+        public static Call ToCallFromPostCallsDTO(this PostCallsDTO callDTO, Admin admin)
+        {
+            return new Call
+            {
+                Description = callDTO.Description,
+                Duration = callDTO.Duration,
+                IsCompleted = callDTO.IsCompleted,
+                MadeOn = callDTO.MadeOn,
+                Type = callDTO.Type,
+                ClientId = callDTO.ClientId,
+                CreatedBy = admin,
+                CreatedById = admin.Id,
+                CreatedOn = DateTime.Now,
+            };
+        }
     }
 }

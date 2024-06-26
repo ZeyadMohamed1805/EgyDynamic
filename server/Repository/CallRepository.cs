@@ -16,12 +16,14 @@ namespace server.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<PaginatedResponse<GetCallsDTO>> GetAll(PaginatedQuery query)
+
+        public async Task<PaginatedResponse<GetCallsDTO>> GetByClient(int id, PaginatedQuery query)
         {
             var skipNumber = (query.PageNumber - 1) * query.PageSize;
-            var totalCount = await _dbContext.Calls.CountAsync();
+            var totalCount = await _dbContext.Calls.Where(call => call.ClientId == id).CountAsync();
             var totalPages = (int)Math.Ceiling(totalCount / (double)query.PageSize);
             var calls = await _dbContext.Calls
+                .Where(call => call.ClientId == id)
                 .Skip(skipNumber)
                 .Take(query.PageSize)
                 .Include(call => call.CreatedBy)
@@ -37,23 +39,34 @@ namespace server.Repository
             };
         }
 
-        public async Task<List<Call>> GetByClient(int id)
+        public async Task<Call?> GetById(int id)
         {
-            throw new NotImplementedException();
+            var call = await _dbContext.Calls.FindAsync(id);
+            return call;
         }
 
         public async Task Post(Call call)
         {
-            throw new NotImplementedException();
+            await _dbContext.Calls.AddAsync(call);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Put(Call call, PutCallsDTO clientDTO, Admin admin)
+        public async Task Put(Call call, PutCallsDTO callDTO, Admin admin)
         {
-            throw new NotImplementedException();
+            call.UpdatedOn = DateTime.Now;
+            call.UpdatedBy = admin;
+            call.Description = callDTO.Description;
+            call.Duration = callDTO.Duration;
+            call.MadeOn = callDTO.MadeOn;
+            call.IsCompleted = callDTO.IsCompleted;
+            call.Type = callDTO.Type;
+
+            await _dbContext.SaveChangesAsync();
         }
         public async Task Delete(Call call)
         {
-            throw new NotImplementedException();
+            _dbContext.Calls.Remove(call);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
