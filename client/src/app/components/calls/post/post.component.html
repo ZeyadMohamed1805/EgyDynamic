@@ -1,1 +1,59 @@
-<p>post works!</p>
+<form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>التوصيف</mat-label>
+    <input matInput formControlName="description" placeholder="التوصيف" />
+    <mat-error *ngIf="formGroup.get('description')?.hasError('required')">
+      يجب إدخال التوصيف
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>المدة</mat-label>
+    <input
+      matInput
+      type="number"
+      formControlName="duration"
+      placeholder="المدة"
+    />
+    <mat-error *ngIf="formGroup.get('duration')?.hasError('required')">
+      يجب إدخال المدة
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>الوقت</mat-label>
+    <input matInput type="date" formControlName="madeOn" placeholder="الوقت" />
+    <mat-error *ngIf="formGroup.get('madeOn')?.hasError('required')">
+      يجب إدخال الوقت
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>انتهت</mat-label>
+    <mat-select formControlName="isCompleted" placeholder="انتهت">
+      <mat-option [value]="true">
+        <span>نعم</span>
+      </mat-option>
+      <mat-option [value]="false">
+        <span>لا</span>
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="formGroup.get('isCompleted')?.hasError('required')">
+      يجب إدخال انتهت
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>النوع</mat-label>
+    <mat-select formControlName="type" placeholder="النوع">
+      <mat-option [value]="0">
+        <span>اتصال</span>
+      </mat-option>
+      <mat-option [value]="1">
+        <span>رسالة</span>
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="formGroup.get('type')?.hasError('required')">
+      يجب إدخال النوع
+    </mat-error>
+  </mat-form-field>
+  <button type="submit" class="button" [disabled]="!formGroup.valid">
+    <span>احفظ</span>
+  </button>
+</form>
