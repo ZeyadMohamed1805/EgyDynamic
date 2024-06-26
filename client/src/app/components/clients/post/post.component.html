@@ -1,1 +1,26 @@
-<p>post works!</p>
+<form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>الاسم</mat-label>
+    <input matInput formControlName="name" placeholder="الاسم" />
+    <mat-error *ngIf="formGroup.get('name')?.hasError('required')">
+      يجب إدخال الاسم
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>العنوان</mat-label>
+    <input matInput formControlName="address" placeholder="العنوان" />
+    <mat-error *ngIf="formGroup.get('address')?.hasError('required')">
+      يجب إدخال العنوان
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>التوصيف</mat-label>
+    <input matInput formControlName="description" placeholder="التوصيف" />
+    <mat-error *ngIf="formGroup.get('description')?.hasError('required')">
+      يجب إدخال التوصيف
+    </mat-error>
+  </mat-form-field>
+  <button type="submit" class="button" [disabled]="!formGroup.valid">
+    <span>احفظ</span>
+  </button>
+</form>

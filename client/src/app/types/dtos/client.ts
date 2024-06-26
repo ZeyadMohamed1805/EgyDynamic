@@ -8,3 +8,9 @@ export type TClientDTO = {
   createdBy: string;
   updatedBy?: string;
 };
+
+export type TPostClientDTO = {
+  name: string;
+  address: string;
+  description: string;
+};
