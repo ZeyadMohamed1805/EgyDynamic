@@ -5,6 +5,8 @@ import { ETurnPage } from '../../../types/enums/turn';
 import { TClientDTO } from '../../../types/dtos/client';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +20,10 @@ export class MainComponent implements OnInit {
   names = computed(() => [...this.clientService.names(), 'القرارات']);
   data: TClientDTO[] = [];
 
-  constructor(public clientService: ClientService) {}
+  constructor(
+    public clientService: ClientService,
+    private readonly dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.clientService.getAll().subscribe({
@@ -26,6 +31,10 @@ export class MainComponent implements OnInit {
         this.data = response;
       },
     });
+  }
+
+  openDialog() {
+    this.dialog.open(PostComponent);
   }
 
   onTurn(turnType: ETurnPage): void {
