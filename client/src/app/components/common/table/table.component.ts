@@ -10,6 +10,8 @@ import {
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ETurnPage } from '../../../types/enums/turn';
+import { TClientDTO } from '../../../types/dtos/client';
+import { TPagination } from '../../../types/columns/pages';
 
 @Component({
   selector: 'app-table',
@@ -21,7 +23,7 @@ import { ETurnPage } from '../../../types/enums/turn';
 export class TableComponent implements AfterViewInit, OnChanges {
   @Input() columns: string[] = [];
   @Input() names: string[] = [];
-  @Input() data: any = [];
+  @Input() data: TClientDTO[] = [];
   @Output() turn = new EventEmitter();
 
   dataSource = new MatTableDataSource(this.data);
@@ -32,13 +34,15 @@ export class TableComponent implements AfterViewInit, OnChanges {
     this.dataSource = new MatTableDataSource(this.data);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  onTurn(event: any): void {
+  onTurn(event: TPagination): void {
+    console.log(event);
+
     this.turn.emit(
-      event.pageIndex > event.previousPageIndex
+      event.pageIndex > event.previousPageIndex!
         ? ETurnPage.Next
         : ETurnPage.Previous
     );

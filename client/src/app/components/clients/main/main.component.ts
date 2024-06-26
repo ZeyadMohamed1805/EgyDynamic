@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../common/table/table.component';
 import { ClientService } from '../../../services/client/client.service';
 import { ETurnPage } from '../../../types/enums/turn';
+import { TClientDTO } from '../../../types/dtos/client';
 
 @Component({
   selector: 'app-main',
@@ -31,13 +32,13 @@ export class MainComponent implements OnInit {
     'updatedBy',
     'updatedOn',
   ];
-  data: any = [];
+  data: TClientDTO[] = [];
 
   constructor(public clientService: ClientService) {}
 
   ngOnInit(): void {
     this.clientService.getAll().subscribe({
-      next: (response: any) => {
+      next: (response) => {
         this.data = response;
       },
     });
@@ -46,12 +47,12 @@ export class MainComponent implements OnInit {
   onTurn(turnType: ETurnPage): void {
     turnType === ETurnPage.Next
       ? this.clientService.getNextPage().subscribe({
-          next: (response: any) => {
+          next: (response) => {
             this.data = response;
           },
         })
       : this.clientService.getPreviousPage().subscribe({
-          next: (response: any) => {
+          next: (response) => {
             this.data = response;
           },
         });
