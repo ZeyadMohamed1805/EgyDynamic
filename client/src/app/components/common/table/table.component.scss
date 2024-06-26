@@ -1,0 +1,15 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    
+    table {
+        width: 100%;
+    }
+
+    .pagination {
+        width: 100%;
+        display: grid;
+        place-items: center;
+    }
+}

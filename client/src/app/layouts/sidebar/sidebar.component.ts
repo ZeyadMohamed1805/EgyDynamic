@@ -16,7 +16,7 @@ export class SidebarComponent {
     name: 'الجميع',
     completed: false,
     subColumns: [
-      { name: 'اسم العميل', column: 'name', completed: false },
+      { name: 'الرقم', column: 'name', completed: false },
       { name: 'محل الإقامة', column: 'address', completed: false },
       { name: 'التوصيف', column: 'description', completed: false },
       { name: 'ادخال بواسطة', column: 'createdBy', completed: false },
