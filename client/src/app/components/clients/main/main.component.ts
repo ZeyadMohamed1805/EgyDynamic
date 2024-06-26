@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { PostComponent } from '../post/post.component';
+import { EModalType } from '../../../types/enums/modal';
+import { PutComponent } from '../put/put.component';
 
 @Component({
   selector: 'app-main',
@@ -33,8 +35,17 @@ export class MainComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    this.dialog.open(PostComponent);
+  openDialog(event: { modal: EModalType; data?: TClientDTO }) {
+    switch (event.modal) {
+      case EModalType.Post:
+        this.dialog.open(PostComponent);
+        break;
+      case EModalType.Put:
+        this.dialog.open(PutComponent, {
+          data: event.data,
+        });
+        break;
+    }
   }
 
   onTurn(turnType: ETurnPage): void {

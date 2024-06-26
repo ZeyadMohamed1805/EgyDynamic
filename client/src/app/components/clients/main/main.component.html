@@ -2,7 +2,12 @@
   <div class="container">
     <div class="headers">
       <h1>العملاء</h1>
-      <button mat-fab extended color="primary" (click)="openDialog()">
+      <button
+        mat-fab
+        extended
+        color="primary"
+        (click)="openDialog({ modal: 0 })"
+      >
         <mat-icon>add</mat-icon>
         إضافة
       </button>
@@ -12,6 +17,7 @@
       [columns]="columns()"
       [names]="names()"
       (turn)="onTurn($event)"
+      (open)="openDialog($event)"
     />
   </div>
 </section>

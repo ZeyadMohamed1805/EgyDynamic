@@ -14,3 +14,10 @@ export type TPostClientDTO = {
   address: string;
   description: string;
 };
+
+export type TPutClientDTO = {
+  id: number;
+  name: string;
+  address: string;
+  description: string;
+};

@@ -1,6 +1,10 @@
 import { Injectable, signal } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { TClientDTO, TPostClientDTO } from '../../types/dtos/client';
+import {
+  TClientDTO,
+  TPostClientDTO,
+  TPutClientDTO,
+} from '../../types/dtos/client';
 
 @Injectable({
   providedIn: 'root',
@@ -51,5 +55,12 @@ export class ClientService {
 
   post(client: TPostClientDTO) {
     return this.apiService.post<TPostClientDTO, null>(`/client`, client);
+  }
+
+  put(client: TPutClientDTO) {
+    return this.apiService.put<TPutClientDTO, null>(
+      `/client/${client.id}`,
+      client
+    );
   }
 }

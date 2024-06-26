@@ -14,6 +14,7 @@ import { TClientDTO } from '../../../types/dtos/client';
 import { TPagination } from '../../../types/columns/pages';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { EModalType } from '../../../types/enums/modal';
 
 @Component({
   selector: 'app-table',
@@ -27,6 +28,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @Input() names: string[] = [];
   @Input() data: TClientDTO[] = [];
   @Output() turn = new EventEmitter();
+  @Output() open = new EventEmitter();
 
   dataSource = new MatTableDataSource(this.data);
 
@@ -46,5 +48,9 @@ export class TableComponent implements AfterViewInit, OnChanges {
         ? ETurnPage.Next
         : ETurnPage.Previous
     );
+  }
+
+  onOpenModal(modalType: EModalType, element: TClientDTO): void {
+    this.open.emit({ modal: modalType, data: element });
   }
 }
