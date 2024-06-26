@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { TClientDTO } from '../../types/dtos/client';
 
@@ -6,7 +6,7 @@ import { TClientDTO } from '../../types/dtos/client';
   providedIn: 'root',
 })
 export class ClientService {
-  names: string[] = [
+  names = signal([
     'الرقم',
     'الاسم',
     'التوصيف',
@@ -15,8 +15,8 @@ export class ClientService {
     'التاريخ',
     'المعدل',
     'اليوم',
-  ];
-  columns: string[] = [
+  ]);
+  columns = signal([
     'id',
     'name',
     'description',
@@ -25,7 +25,7 @@ export class ClientService {
     'createdOn',
     'updatedBy',
     'updatedOn',
-  ];
+  ]);
   pageSize: number = 3;
   pageNumber: number = 1;
 

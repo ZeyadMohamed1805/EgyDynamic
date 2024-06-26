@@ -5,6 +5,19 @@
     
     table {
         width: 100%;
+
+        .buttons { 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            button {
+                border-radius: 8px;
+                aspect-ratio: 1;
+                max-height: 32px;
+                max-width: 32px;
+            }
+        }
     }
 
     .pagination {

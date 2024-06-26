@@ -12,11 +12,13 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ETurnPage } from '../../../types/enums/turn';
 import { TClientDTO } from '../../../types/dtos/client';
 import { TPagination } from '../../../types/columns/pages';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [MatPaginatorModule, MatTableModule],
+  imports: [MatPaginatorModule, MatTableModule, MatButtonModule, MatIconModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
@@ -39,8 +41,6 @@ export class TableComponent implements AfterViewInit, OnChanges {
   }
 
   onTurn(event: TPagination): void {
-    console.log(event);
-
     this.turn.emit(
       event.pageIndex > event.previousPageIndex!
         ? ETurnPage.Next

@@ -7,9 +7,19 @@
         flex-direction: column;
         gap: 16px;
 
-        h1 {
-            font-size: 40px;
-            font-weight: 700;
+        .headers {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h1 {
+                font-size: 40px;
+                font-weight: 700;
+            }
+
+            button {
+                border-radius: 8px;
+            }
         }
     }
 }

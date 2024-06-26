@@ -1,10 +1,16 @@
 <section id="clients">
   <div class="container">
-    <h1>العملاء</h1>
+    <div class="headers">
+      <h1>العملاء</h1>
+      <button mat-fab extended color="primary">
+        <mat-icon>add</mat-icon>
+        إضافة
+      </button>
+    </div>
     <app-table
       [data]="data"
-      [columns]="clientService.columns"
-      [names]="clientService.names"
+      [columns]="columns()"
+      [names]="names()"
       (turn)="onTurn($event)"
     />
   </div>

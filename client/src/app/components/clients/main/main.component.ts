@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed } from '@angular/core';
 import { TableComponent } from '../../common/table/table.component';
 import { ClientService } from '../../../services/client/client.service';
 import { ETurnPage } from '../../../types/enums/turn';
 import { TClientDTO } from '../../../types/dtos/client';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableComponent, MatButtonModule, MatIconModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
 export class MainComponent implements OnInit {
+  columns = computed(() => [...this.clientService.columns(), 'actions']);
+  names = computed(() => [...this.clientService.names(), 'القرارات']);
   data: TClientDTO[] = [];
 
   constructor(public clientService: ClientService) {}

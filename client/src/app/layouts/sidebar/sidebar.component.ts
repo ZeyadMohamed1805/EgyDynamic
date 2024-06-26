@@ -53,11 +53,15 @@ export class SidebarComponent {
       }
       return { ...column };
     });
-    this.clientService.columns = this.columnList()
-      .subColumns.filter((column) => column.completed)
-      .map((column) => column.column);
-    this.clientService.names = this.columnList()
-      .subColumns.filter((column) => column.completed)
-      .map((column) => column.name);
+    this.clientService.columns.set(
+      this.columnList()
+        .subColumns.filter((column) => column.completed)
+        .map((column) => column.column)
+    );
+    this.clientService.names.set(
+      this.columnList()
+        .subColumns.filter((column) => column.completed)
+        .map((column) => column.name)
+    );
   }
 }
