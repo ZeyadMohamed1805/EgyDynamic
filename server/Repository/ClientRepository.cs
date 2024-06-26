@@ -5,7 +5,6 @@ using server.DTOs.Client;
 using server.Mappers;
 using server.Models;
 using server.Utils;
-using server.Utils.Client;
 
 namespace server.Repository
 {
@@ -18,7 +17,7 @@ namespace server.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<PaginatedResponse<GetClientsDTO>> GetAll(ClientQuery query)
+        public async Task<PaginatedResponse<GetClientsDTO>> GetAll(PaginatedQuery query)
         {
             var skipNumber = (query.PageNumber - 1) * query.PageSize;
             var totalCount = await _dbContext.Clients.CountAsync();

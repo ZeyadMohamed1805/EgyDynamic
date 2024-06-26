@@ -6,7 +6,7 @@ using server.DTOs.Client;
 using server.Extensions;
 using server.Mappers;
 using server.Models;
-using server.Utils.Client;
+using server.Utils;
 
 namespace server.Controllers
 {
@@ -24,7 +24,7 @@ namespace server.Controllers
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAll([FromQuery] ClientQuery query)
+        public async Task<IActionResult> GetAll([FromQuery] PaginatedQuery query)
         {
             var clients = await _clientRepository.GetAll(query);
             return Ok(clients);
