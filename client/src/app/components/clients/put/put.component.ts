@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientService } from '../../../services/client/client.service';
 import { NgIf } from '@angular/common';
-import { TClientDTO } from '../../../types/dtos/client';
+import { TClient, TClientDTO } from '../../../types/dtos/client';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 
@@ -25,7 +25,7 @@ export class PutComponent {
   formGroup: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: TClientDTO,
+    @Inject(MAT_DIALOG_DATA) public data: TClient,
     private readonly formBuilder: FormBuilder,
     private readonly snackBar: MatSnackBar,
     private readonly clientService: ClientService

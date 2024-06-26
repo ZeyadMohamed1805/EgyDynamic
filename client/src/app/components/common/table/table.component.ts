@@ -10,7 +10,7 @@ import {
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ETurnPage } from '../../../types/enums/turn';
-import { TClientDTO } from '../../../types/dtos/client';
+import { TClient } from '../../../types/dtos/client';
 import { TPagination } from '../../../types/columns/pages';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,9 @@ import { EModalType } from '../../../types/enums/modal';
 export class TableComponent implements AfterViewInit, OnChanges {
   @Input() columns: string[] = [];
   @Input() names: string[] = [];
-  @Input() data: TClientDTO[] = [];
+  @Input() data: TClient[] = [];
+  @Input() totalPages: number = 1;
+  @Input() totalCount: number = 3;
   @Output() turn = new EventEmitter();
   @Output() open = new EventEmitter();
 
@@ -50,7 +52,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
     );
   }
 
-  onOpenModal(modalType: EModalType, element: TClientDTO): void {
+  onOpenModal(modalType: EModalType, element: TClient): void {
     this.open.emit({ modal: modalType, data: element });
   }
 }

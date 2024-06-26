@@ -2,7 +2,7 @@ import { Component, OnInit, computed } from '@angular/core';
 import { TableComponent } from '../../common/table/table.component';
 import { ClientService } from '../../../services/client/client.service';
 import { ETurnPage } from '../../../types/enums/turn';
-import { TClientDTO } from '../../../types/dtos/client';
+import { TClient } from '../../../types/dtos/client';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,7 @@ import { saveAs } from 'file-saver';
 export class MainComponent implements OnInit {
   columns = computed(() => [...this.clientService.columns(), 'actions']);
   names = computed(() => [...this.clientService.names(), 'القرارات']);
-  data: TClientDTO[] = [];
+  data: TClient[] = [];
 
   constructor(
     public clientService: ClientService,
@@ -37,12 +37,14 @@ export class MainComponent implements OnInit {
   onFetchClients(): void {
     this.clientService.getAll().subscribe({
       next: (response) => {
-        this.data = response;
+        this.clientService.totalCount = response.totalCount;
+        this.clientService.totalPages = response.totalPages;
+        this.data = response.data;
       },
     });
   }
 
-  onOpenDialog(event: { modal: EModalType; data?: TClientDTO }) {
+  onOpenDialog(event: { modal: EModalType; data?: TClient }) {
     switch (event.modal) {
       case EModalType.Post:
         this.dialog.open(PostComponent);
@@ -63,12 +65,16 @@ export class MainComponent implements OnInit {
     turnType === ETurnPage.Next
       ? this.clientService.getNextPage().subscribe({
           next: (response) => {
-            this.data = response;
+            this.clientService.totalCount = response.totalCount;
+            this.clientService.totalPages = response.totalPages;
+            this.data = response.data;
           },
         })
       : this.clientService.getPreviousPage().subscribe({
           next: (response) => {
-            this.data = response;
+            this.clientService.totalCount = response.totalCount;
+            this.clientService.totalPages = response.totalPages;
+            this.data = response.data;
           },
         });
   }

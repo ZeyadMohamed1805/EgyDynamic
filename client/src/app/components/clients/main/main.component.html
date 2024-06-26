@@ -26,6 +26,8 @@
     <div class="table">
       <app-table
         [data]="data"
+        [totalCount]="clientService.totalCount"
+        [totalPages]="clientService.totalPages"
         [columns]="columns()"
         [names]="names()"
         (turn)="onTurn($event)"

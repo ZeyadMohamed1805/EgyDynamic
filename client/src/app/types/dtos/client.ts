@@ -1,4 +1,4 @@
-export type TClientDTO = {
+export type TClient = {
   id: number;
   name: string;
   address: string;
@@ -7,6 +7,12 @@ export type TClientDTO = {
   updatedOn?: Date;
   createdBy: string;
   updatedBy?: string;
+};
+
+export type TClientDTO = {
+  totalCount: number;
+  totalPages: number;
+  data: TClient[];
 };
 
 export type TPostClientDTO = {

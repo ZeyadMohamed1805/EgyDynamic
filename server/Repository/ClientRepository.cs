@@ -2,7 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using server.Abstracts.Interfaces;
 using server.Data;
 using server.DTOs.Client;
+using server.Mappers;
 using server.Models;
+using server.Utils;
 using server.Utils.Client;
 
 namespace server.Repository
@@ -16,11 +18,25 @@ namespace server.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<List<Client>> GetAll(ClientQuery query)
+        public async Task<PaginatedResponse<GetClientsDTO>> GetAll(ClientQuery query)
         {
             var skipNumber = (query.PageNumber - 1) * query.PageSize;
-            var clients = await _dbContext.Clients.Skip(skipNumber).Take(query.PageSize).Include(client => client.CreatedBy).Include(client => client.UpdatedBy).ToListAsync();
-            return clients;
+            var totalCount = await _dbContext.Clients.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)query.PageSize);
+            var clients = await _dbContext.Clients
+                .Skip(skipNumber)
+                .Take(query.PageSize)
+                .Include(client => client.CreatedBy)
+                .Include(client => client.UpdatedBy)
+                .Select(client => client.ToGetClientsDTOFromClient())
+                .ToListAsync();
+
+            return new PaginatedResponse<GetClientsDTO>
+            {
+                Data = clients,
+                TotalCount = totalCount,
+                TotalPages = totalPages
+            };
         }
 
         public async Task<Client?> GetById(int id)

@@ -32,25 +32,27 @@ export class ClientService {
   ]);
   pageSize: number = 3;
   pageNumber: number = 1;
+  totalCount: number = 3;
+  totalPages: number = 1;
 
   constructor(private readonly apiService: ApiService) {}
 
   getAll() {
     this.pageNumber = 1;
     this.pageSize = 3;
-    return this.apiService.get<TClientDTO[]>(
+    return this.apiService.get<TClientDTO>(
       `/client?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`
     );
   }
 
   getNextPage() {
-    return this.apiService.get<TClientDTO[]>(
+    return this.apiService.get<TClientDTO>(
       `/client?pageSize=${this.pageSize}&pageNumber=${++this.pageNumber}`
     );
   }
 
   getPreviousPage() {
-    return this.apiService.get<TClientDTO[]>(
+    return this.apiService.get<TClientDTO>(
       `/client?pageSize=${this.pageSize}&pageNumber=${
         this.pageNumber > 1 ? --this.pageNumber : 1
       }`

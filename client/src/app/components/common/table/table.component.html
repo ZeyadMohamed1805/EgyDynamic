@@ -29,8 +29,9 @@
   </table>
   <div class="pagination">
     <mat-paginator
-      [length]="this.data.length < 3 ? this.data.length : this.data.length + 1"
+      [length]="this.totalCount"
       [pageSize]="this.data.length"
+      [hidePageSize]="true"
       (page)="onTurn($event)"
     ></mat-paginator>
   </div>

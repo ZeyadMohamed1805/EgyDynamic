@@ -40,3 +40,7 @@
       display: none;
     }
   }
+
+  ::ng-deep .mat-mdc-paginator-range-label {
+    display: none;
+}
