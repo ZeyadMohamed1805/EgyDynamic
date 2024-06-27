@@ -55,11 +55,11 @@ export class MainComponent implements OnInit {
   }
 
   onOpenDialog(event: { modal: EModalType; data?: TCall }) {
-    console.log(event.data);
-
     switch (event.modal) {
       case EModalType.Post:
-        this.dialog.open(PostComponent);
+        this.dialog.open(PostComponent, {
+          data: this.router.url.at(this.router.url.length - 1),
+        });
         break;
       case EModalType.Put:
         this.dialog.open(PutComponent, {

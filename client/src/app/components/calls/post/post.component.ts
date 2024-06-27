@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  WritableSignal,
+  signal,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgIf } from '@angular/common';
 import { CallService } from '../../../services/call/call.service';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute } from '@angular/router';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post',
@@ -28,13 +34,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   formGroup: FormGroup;
-  clientId: number = 1;
+  clientId: WritableSignal<number> = signal(1);
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: number,
     private readonly formBuilder: FormBuilder,
     private readonly snackBar: MatSnackBar,
-    private readonly callService: CallService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly callService: CallService
   ) {
     this.formGroup = this.formBuilder.group({
       description: ['', [Validators.required]],
@@ -42,14 +48,12 @@ export class PostComponent implements OnInit {
       madeOn: ['', [Validators.required]],
       isCompleted: ['', [Validators.required]],
       type: ['', [Validators.required]],
-      clientId: [this.clientId, [Validators.required]],
+      clientId: [this.data, [Validators.required]],
     });
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.clientId = params['id'];
-    });
+    console.log(this.data);
   }
 
   onSubmit(): void {
