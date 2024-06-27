@@ -32,3 +32,4 @@ The Client Management System is a full stack application designed to manage clie
     -   Entity Framework
     -   LINQ
     -   SQL Server
+    -   Repository Design Pattern
