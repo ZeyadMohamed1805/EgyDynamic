@@ -1,0 +1,28 @@
+#not-found {
+    min-height: calc(100vh - 100px);
+    width: 100%;
+    padding: 24px;
+    display: grid;
+    place-items: center;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+
+        img {
+            aspect-ratio: 3 / 2;
+            height: 420px;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        button {
+            width: -moz-fit-content;
+            width: fit-content;
+            border-radius: 8px;
+        }
+    }
+}
