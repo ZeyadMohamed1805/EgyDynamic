@@ -49,6 +49,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator: any;
 
   ngOnInit(): void {
+    this.route.set(this.router.url);
     this.router.events.subscribe(() => {
       this.route.set(this.router.url);
     });

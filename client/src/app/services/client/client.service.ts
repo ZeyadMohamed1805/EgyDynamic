@@ -53,9 +53,7 @@ export class ClientService {
 
   getPreviousPage() {
     return this.apiService.get<TClientDTO>(
-      `/client?pageSize=${this.pageSize}&pageNumber=${
-        this.pageNumber > 1 ? --this.pageNumber : 1
-      }`
+      `/client?pageSize=${this.pageSize}&pageNumber=${--this.pageNumber}`
     );
   }
 
